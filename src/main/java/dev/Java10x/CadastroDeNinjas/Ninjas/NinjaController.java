@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
 @RestController
-@RequestMapping
+@RequestMapping("ninjas")
 public class NinjaController {
 
     @GetMapping("/boasvindas")
@@ -25,11 +24,11 @@ public class NinjaController {
         return "Criar";
     }
     @GetMapping("/read")
-    public String mostrarTodos(){
+    public String mostrarTodosNinjas(){
         return "Mostrar todos";
     }
     @GetMapping("/readID")
-    public String mostrarPorID(){
+    public String mostrarNinjaPorID(){
         return "Mostrar por ID";
     }
     @PutMapping("/update")
