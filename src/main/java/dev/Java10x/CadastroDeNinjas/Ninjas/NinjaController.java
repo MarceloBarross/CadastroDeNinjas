@@ -1,5 +1,7 @@
 package dev.Java10x.CadastroDeNinjas.Ninjas;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("ninjas")
 public class NinjaController {
 
-    @GetMapping("/boasvindas")
-    public String boasVinadas(){
-        return "Boas Vindas";
+    private NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService){
+        this.ninjaService = ninjaService;
     }
 
     @PostMapping("/create")
@@ -24,8 +27,8 @@ public class NinjaController {
         return "Criar";
     }
     @GetMapping("/read")
-    public String mostrarTodosNinjas(){
-        return "Mostrar todos";
+    public List<NinjaModel> mostrarTodosNinjas(){
+        return ninjaService.listarTodos();
     }
     @GetMapping("/readID")
     public String mostrarNinjaPorID(){
