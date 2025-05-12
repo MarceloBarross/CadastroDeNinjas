@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,18 +31,16 @@ public class NinjaController {
     public List<NinjaModel> mostrarTodosNinjas(){
         return ninjaService.listarTodos();
     }
-    @GetMapping("/readID")
-    public String mostrarNinjaPorID(){
-        return "Mostrar por ID";
+    @GetMapping("/read/{id}")
+    public NinjaModel mostrarNinjaPorID(@PathVariable Long id){
+        return ninjaService.listarPorID(id);
     }
     @PutMapping("/update")
     public String alterarNinja() {
         return "Alterar";
     }
-    @DeleteMapping("/delete")
-    public String deltarNinja(){
+    @DeleteMapping("/delete/{id}")
+    public String deltarNinja(@PathVariable Long id){
         return "Deletar";
     }
-    
-    
 }
