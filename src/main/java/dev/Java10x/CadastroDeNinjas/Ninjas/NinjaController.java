@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -24,15 +25,15 @@ public class NinjaController {
     }
 
     @PostMapping("/create")
-    public String criarNinja() {
-        return "Criar";
+    public NinjaModel criarNinja(@RequestBody NinjaModel ninjaModel) {
+        return ninjaService.criarNinja(ninjaModel);
     }
     @GetMapping("/read")
-    public List<NinjaModel> mostrarTodosNinjas(){
+    public List<NinjaModel> listarTodos(){
         return ninjaService.listarTodos();
     }
     @GetMapping("/read/{id}")
-    public NinjaModel mostrarNinjaPorID(@PathVariable Long id){
+    public NinjaModel listarPorID(@PathVariable Long id){
         return ninjaService.listarPorID(id);
     }
     @PutMapping("/update")
