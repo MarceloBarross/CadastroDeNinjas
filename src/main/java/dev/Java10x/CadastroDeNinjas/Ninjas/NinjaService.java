@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class NinjaService {
     private NinjaRepository ninjaRepository;
@@ -29,4 +31,20 @@ public class NinjaService {
         return ninjaRepository.save(ninjaModel);
     }
 
+    //Deletar ninja
+    public void deletarNinja(Long id){
+        ninjaRepository.deleteById(id);
+    }
+
+    //Atualizar ninja
+    public NinjaModel alterarNinja(Long id, NinjaModel data){
+        NinjaModel ninjaModel = ninjaRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Ninja não encontrado"));
+        
+        ninjaModel.setEmail(data.getEmail());
+        ninjaModel.setIdade(data.getIdade());
+        ninjaModel.setMissoes(data.getMissoes());
+        ninjaModel.setNome(data.getNome());
+
+        return ninjaRepository.save(ninjaModel);
+    }
 }
