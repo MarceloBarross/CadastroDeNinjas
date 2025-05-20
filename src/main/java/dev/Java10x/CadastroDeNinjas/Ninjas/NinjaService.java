@@ -8,9 +8,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class NinjaService {
     private NinjaRepository ninjaRepository;
+    private NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository){
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper){
         this.ninjaRepository=ninjaRepository;
+        this.ninjaMapper=ninjaMapper;
+    }
+
+    //Salvar novo ninja
+    public NinjaDTO criarNinja(NinjaDTO ninjaDTO){
+        NinjaModel ninja = ninjaMapper.map(ninjaDTO);
+        ninja = ninjaRepository.save(ninja);
+        return ninjaMapper.map(ninja);
     }
 
     // Listar todos ninjas
@@ -24,10 +33,6 @@ public class NinjaService {
         return ninjaModel.orElse(null);
     }
 
-    //Salvar novo ninja
-    public NinjaModel criarNinja(NinjaModel ninjaModel){
-        return ninjaRepository.save(ninjaModel);
-    }
 
     //Deletar ninja
     public void deletarNinja(Long id){
@@ -38,7 +43,8 @@ public class NinjaService {
     public NinjaModel alterarNinja(Long id, NinjaModel data){
         if(ninjaRepository.existsById(id)){
             data.setId(id);
-            return data;
+
+            return ninjaRepository.save(data);
         }
         return null;
     }
