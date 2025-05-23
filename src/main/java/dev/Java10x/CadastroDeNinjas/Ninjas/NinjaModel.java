@@ -34,13 +34,12 @@ public class NinjaModel {
     @Column(unique = true)
     private String email;
 
+    @Column(name = "rank")
+    private String rank;
+
     @ManyToOne
     @JoinColumn(name = "missoes_id")
     private MissoesModel missoes;
-
-
-
-
    
 }
 
