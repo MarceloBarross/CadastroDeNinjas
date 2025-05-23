@@ -2,35 +2,46 @@ package dev.Java10x.CadastroDeNinjas.Missoes;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @RequestMapping("missoes")
 public class MissoesController {
 
+    private MissoesService missoesService;
+
+    public MissoesController(MissoesService missoesService){
+        this.missoesService = missoesService;
+    }
+
     @PostMapping("/create")
-    public String criarMissao() {
-        return "Criar";
+    public MissoesModel criarMissao(@RequestBody MissoesModel missoesModel) {
+        return missoesService.criarMissao(missoesModel);
     }
     @GetMapping("/read")
-    public String mostrarTodasMissoes(){
-        return "Mostrar todos";
+    public List<MissoesModel> mostrarTodasMissoes(){
+        return missoesService.listarTodos();
     }
-    @GetMapping("/readID")
-    public String mostrarMissaoPorID(){
-        return "Mostrar por ID";
+    @GetMapping("/read/{id}")
+    public MissoesModel listarPorID(@PathVariable Long id){
+        return missoesService.listarPorID(id);
     }
-    @PutMapping("/update")
-    public String alterarMissao() {
-        return "Alterar";
+    @PutMapping("/update/{id}")
+    public MissoesModel alterarMissao(@PathVariable Long id, @RequestBody MissoesModel data) {
+        return missoesService.alterarMissao(id, data);
     }
-    @DeleteMapping("/delete")
-    public String deltarMissao(){
-        return "Deletar";
+    @DeleteMapping("/delete/{id}")
+    public void deltarMissao(@PathVariable Long id){
+        missoesService.deltarMissao(id);
     }
     
     
