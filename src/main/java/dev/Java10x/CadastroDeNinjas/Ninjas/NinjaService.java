@@ -2,6 +2,7 @@ package dev.Java10x.CadastroDeNinjas.Ninjas;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -23,14 +24,17 @@ public class NinjaService {
     }
 
     // Listar todos ninjas
-    public List<NinjaModel> listarTodos(){
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> listarTodos(){
+        List<NinjaModel> ninjasModel = ninjaRepository.findAll();
+        List<NinjaDTO> ninjasDTO = ninjasModel.stream().map(ninjaMapper::map).collect(Collectors.toList());
+        return ninjasDTO;
+        
     }
 
     //Listar por id
-    public NinjaModel listarPorID(Long id){
+    public NinjaDTO listarPorID(Long id){
         Optional<NinjaModel> ninjaModel = ninjaRepository.findById(id);
-        return ninjaModel.orElse(null);
+        return ninjaModel.map(ninjaMapper::map).orElse(null);
     }
 
 
@@ -40,11 +44,13 @@ public class NinjaService {
     }
 
     //Atualizar ninja
-    public NinjaModel alterarNinja(Long id, NinjaModel data){
-        if(ninjaRepository.existsById(id)){
-            data.setId(id);
-
-            return ninjaRepository.save(data);
+    public NinjaDTO alterarNinja(Long id, NinjaDTO data){
+        Optional<NinjaModel> ninjaProcurado = ninjaRepository.findById(id);
+        if (ninjaProcurado.isPresent()) {
+            NinjaModel atualizacoesNinjaProcurado = ninjaMapper.map(data);
+            atualizacoesNinjaProcurado.setId(id);
+            NinjaModel ninjaAtualizado = ninjaRepository.save(atualizacoesNinjaProcurado);
+            return ninjaMapper.map(ninjaAtualizado);
         }
         return null;
     }

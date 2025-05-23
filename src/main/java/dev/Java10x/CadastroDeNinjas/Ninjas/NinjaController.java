@@ -30,15 +30,15 @@ public class NinjaController {
         return ninjaService.criarNinja(ninjaDTO);
     }
     @GetMapping("/read")
-    public List<NinjaModel> listarTodos(){
+    public List<NinjaDTO> listarTodos(){
         return ninjaService.listarTodos();
     }
     @GetMapping("/read/{id}")
-    public NinjaModel listarPorID(@PathVariable Long id){
+    public NinjaDTO listarPorID(@PathVariable Long id){
         return ninjaService.listarPorID(id);
     }
     @PutMapping("/update/{id}")
-    public NinjaModel alterarNinja(@PathVariable Long id, @RequestBody NinjaModel data) {
+    public NinjaDTO alterarNinja(@PathVariable Long id, @RequestBody NinjaDTO data) {
         return ninjaService.alterarNinja(id, data);
     }
     @DeleteMapping("/delete/{id}")
