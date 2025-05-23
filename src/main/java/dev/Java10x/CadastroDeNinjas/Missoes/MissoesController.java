@@ -24,19 +24,19 @@ public class MissoesController {
     }
 
     @PostMapping("/create")
-    public MissoesModel criarMissao(@RequestBody MissoesModel missoesModel) {
-        return missoesService.criarMissao(missoesModel);
+    public MissoesDTO criarMissao(@RequestBody MissoesDTO missoesDTO) {
+        return missoesService.criarMissao(missoesDTO);
     }
     @GetMapping("/read")
-    public List<MissoesModel> mostrarTodasMissoes(){
+    public List<MissoesDTO> mostrarTodasMissoes(){
         return missoesService.listarTodos();
     }
     @GetMapping("/read/{id}")
-    public MissoesModel listarPorID(@PathVariable Long id){
+    public MissoesDTO listarPorID(@PathVariable Long id){
         return missoesService.listarPorID(id);
     }
     @PutMapping("/update/{id}")
-    public MissoesModel alterarMissao(@PathVariable Long id, @RequestBody MissoesModel data) {
+    public MissoesDTO alterarMissao(@PathVariable Long id, @RequestBody MissoesDTO data) {
         return missoesService.alterarMissao(id, data);
     }
     @DeleteMapping("/delete/{id}")
