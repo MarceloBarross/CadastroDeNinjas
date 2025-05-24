@@ -54,7 +54,7 @@ public class NinjaController {
             NinjaDTO ninjaDTO = ninjaService.alterarNinja(id, data);
             return ResponseEntity.ok(ninjaDTO);
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ID " + id + " nao encontrado nos nossos registros");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ninja com ID " + id + " nao encontrado nos nossos registros");
         }
     }
     @DeleteMapping("/delete/{id}")

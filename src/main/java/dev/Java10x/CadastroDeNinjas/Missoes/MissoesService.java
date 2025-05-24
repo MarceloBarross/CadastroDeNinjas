@@ -35,7 +35,7 @@ public class MissoesService {
         return missoesMapper.map(missoesModel);
     }
 
-    public void deltarMissao(Long id){
+    public void deletarMissao(Long id){
         missoesRepository.deleteById(id);
     }
     public MissoesDTO alterarMissao(Long id, MissoesDTO data){
