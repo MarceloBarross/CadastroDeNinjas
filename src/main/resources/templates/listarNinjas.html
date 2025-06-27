@@ -25,7 +25,10 @@
                 <td th:text="${ninja.idade}"></td>
                 <td th:text="${ninja.email}"></td>
                 <td th:text="${ninja.rank}"></td>
-                <td th:text="${ninja.missoes}"></td>
+                <td>
+                    <span th:if="${ninja.missoes}"><span th:text="${ninja.missoes.nome}"></span></span>
+                    <span th:if="${ninja.missoes == null}">Sem missoes</span>
+                </td>
             </tr>
         </tbody>
     </table>
